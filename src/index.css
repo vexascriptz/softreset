@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Semantic tokens. Components use names such as bg-surface and text-muted, never raw hex. */
+:root {
+  color-scheme: light;
+  --canvas: #f6f9fc;
+  --surface: #ffffff;
+  --surface-2: #eef4fa;
+  --line: #dfe8f1;
+  --ink: #26394d;
+  --muted: #5b6c80;
+  --brand: #8bbce8;
+  --brand-soft: #dceeff;
+  --brand-strong: #6ba7da;
+  --on-brand: #1c2b3a;
+  --accent: #2a6496;
+  --ok: #2f7d5b;
+  --ok-soft: #e3f4ec;
+  --caution: #8a5e0b;
+  --caution-soft: #fbf1dc;
+  --concern: #a23b43;
+  --concern-soft: #fbe6e7;
+  --float: 0 18px 40px -18px rgb(38 57 77 / 0.35), 0 2px 6px rgb(38 57 77 / 0.08);
+}
+
+.dark {
+  color-scheme: dark;
+  --canvas: #0e1822;
+  --surface: #152230;
+  --surface-2: #1b2b3b;
+  --line: #2a3d50;
+  --ink: #e4edf6;
+  --muted: #9fb2c6;
+  --brand: #8bbce8;
+  --brand-soft: #1f3a52;
+  --brand-strong: #a9d0f2;
+  --on-brand: #1c2b3a;
+  --accent: #8bbce8;
+  --ok: #7fcba6;
+  --ok-soft: #173429;
+  --caution: #e5c07b;
+  --caution-soft: #3a2e14;
+  --concern: #f0969b;
+  --concern-soft: #3b1d21;
+  --float: 0 18px 40px -18px rgb(0 0 0 / 0.6);
+}
+
+@theme inline {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-strong: var(--brand-strong);
+  --color-on-brand: var(--on-brand);
+  --color-accent: var(--accent);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-caution: var(--caution);
+  --color-caution-soft: var(--caution-soft);
+  --color-concern: var(--concern);
+  --color-concern-soft: var(--concern-soft);
+  --radius-panel: 14px;
+  --radius-control: 8px;
+  --shadow-float: var(--float);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--brand-soft);
+  }
+}
+
+/* The one orchestrated moment: conclusions settle in. */
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.settle {
+  animation: settle 240ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .settle {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+  }
+}
+
+@media print {
+  @page {
+    margin: 14mm;
+  }
+  body {
+    background: #ffffff;
+    color: #000000;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-flat {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+}
